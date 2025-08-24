@@ -1,5 +1,24 @@
+/**
+ * Classe de test unitaire pour CommandeTriggerHandler.
+ * 
+ * Objectif :
+ *  - Vérifier la règle métier interdisant plus d’une commande en brouillon par compte.
+ */
 @isTest
 public class CommandeTriggerHandlerTest {
+     /**
+     * Teste que l’insertion de deux commandes en brouillon pour le même compte
+     * entraîne une erreur sur la deuxième commande.
+     *
+     * Étapes du test :
+     *  - Création d’un compte client
+     *  - Récupération d’une valeur valide de la picklist Type_de_client__c
+     *  - Création de deux commandes en brouillon associées au même compte
+     *  - Insertion en bulk (allOrNone = false) pour simuler la contrainte
+     *  - Vérification :
+     *      - la première commande est acceptée
+     *      - la deuxième commande échoue avec le message attendu
+     */
 
     @isTest
     static void testUnBrouillonParClient() {

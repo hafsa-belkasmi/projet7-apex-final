@@ -1,5 +1,21 @@
+/**
+ * Classe de test unitaire pour OrderService.
+ * 
+ * Objectif principal :
+ *  - Vérifier la mise à jour des informations liées à l’expédition d’une commande.
+ */
 @isTest
 public class OrderServiceTest {
+      /**
+     * Teste la mise à jour des frais d’expédition (Frais_d_expedition__c) d’une commande.
+     *
+     * Étapes du test :
+     *  - Création d’un compte client
+     *  - Création et insertion d’une commande associée
+     *  - Clonage de la commande et mise à jour du champ Frais_d_expedition__c
+     *  - Enregistrement de la mise à jour en base
+     *  - Vérification que la valeur Frais_d_expedition__c a bien été modifiée
+     */
     @isTest
     static void testUpdateShippingInfo() {
         Account acc = new Account(Name = 'Client Test', Type = 'Client');

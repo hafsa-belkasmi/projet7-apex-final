@@ -1,3 +1,13 @@
+/**
+ * Trigger CommandeManagementTrigger sur l’objet Commande__c.
+ *
+ * Événements gérés :
+ *  - BEFORE INSERT :
+ *      → Valide automatiquement la commande si le compte est de type "Client"
+ *  - BEFORE UPDATE :
+ *      → Valide automatiquement la commande si applicable
+ *      → Met à jour les informations d’expédition si un transporteur est renseigné
+ */
 trigger CommandeManagementTrigger on Commande__c (before insert, before update) {
     for (Commande__c ord : Trigger.new) {
         Account acc = [SELECT Id, Type FROM Account WHERE Id = :ord.Compte__c LIMIT 1];

@@ -1,5 +1,18 @@
+/**
+ * Classe de test unitaire pour la classe CalculMontant.
+ * Vérifie que la logique de calcul du montant fonctionne correctement.
+ */
 @isTest
 public class CalculMontantTest {
+      /**
+     * Teste la méthode calculerMontant lorsqu’une commande contient 0 article.
+     *
+     * Étapes du test :
+     *  - Création d’un compte client
+     *  - Création d’une commande avec 0 article
+     *  - Appel de la méthode CalculMontant.calculerMontant
+     *  - Vérification que le champ Montant__c a bien été calculé (et n’est pas null)
+     */
     @isTest
     static void testCalculMontantAvecZero() {
         // Créer un compte client

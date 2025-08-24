@@ -1,6 +1,19 @@
+/**
+ * Classe handler pour le déclencheur (trigger) sur l’objet Commande__c.
+ * 
+ * Rôles principaux :
+ *  - Vérifier les contraintes métier lors de l’insertion (un seul brouillon par compte)
+ *  - Recalculer le montant des commandes après insertion ou mise à jour
+ */
 public class CommandeTriggerHandler {
-
-    // Avant insertion : interdiction de plusieurs commandes brouillon pour un même compte
+      /**
+     * Événement BEFORE INSERT.
+     * 
+     * Vérifie qu’un même compte ne possède pas déjà une commande en brouillon.
+     * Si c’est le cas, une erreur est ajoutée pour empêcher l’insertion.
+     *
+     * @param commandes  Liste des commandes en cours d’insertion
+     */
     public static void beforeInsert(List<Commande__c> commandes) {
         Set<Id> compteIds = new Set<Id>();
         System.debug('Début beforeInsert');
@@ -53,8 +66,14 @@ public class CommandeTriggerHandler {
 
         System.debug(' Fin beforeInsert');
     }
-
-    // Après insertion : recalcul du montant pour les commandes en brouillon
+       /**
+     * Événement AFTER INSERT.
+     * 
+     * Après insertion d’une commande en brouillon,
+     * déclenche le recalcul du montant via la classe CalculMontant.
+     *
+     * @param commandes  Liste des commandes nouvellement insérées
+     */
     public static void afterInsert(List<Commande__c> commandes) {
         List<Id> commandeIds = new List<Id>();
         System.debug(' afterInsert déclenché');
@@ -74,8 +93,16 @@ public class CommandeTriggerHandler {
             }
         }
     }
-
-    // Après mise à jour : recalcul si statut devient "Brouillon" ou si quantité change
+/**
+     * Événement AFTER UPDATE.
+     * 
+     * Recalcule le montant si :
+     *  - la quantité d’articles a changé
+     *  - ou si le statut est redevenu "Brouillon"
+     *
+     * @param newList  Liste des nouvelles valeurs des commandes
+     * @param oldMap   Map contenant les anciennes valeurs des commandes (par Id)
+     */
     public static void afterUpdate(List<Commande__c> newList, Map<Id, Commande__c> oldMap) {
         List<Id> commandeIds = new List<Id>();
         System.debug('afterUpdate déclenché');

@@ -1,6 +1,26 @@
+/**
+ * Classe de test unitaire pour TransporterSelector.
+ * 
+ * Objectif :
+ *  - Vérifier la récupération des transporteurs disponibles par région
+ *  - Vérifier la sélection du meilleur transporteur (coût le plus bas)
+ */
+
 @isTest
 public class TransporterSelectorTest {
 
+    /**
+     * Teste les méthodes getAvailableTransporters et selectBestTransporter.
+     *
+     * Étapes du test :
+     *  - Création de 3 transporteurs :
+     *      - T1 : disponible, coût 15
+     *      - T2 : disponible, coût 10 (meilleur)
+     *      - T3 : non disponible, coût 20 (ignoré)
+     *  - Insertion en base
+     *  - Vérification que seuls 2 transporteurs disponibles sont renvoyés
+     *  - Vérification que le transporteur au coût le plus bas (T2) est sélectionné
+     */
     @isTest
     static void testGetAvailableTransportersAndBest() {
         // Données de test
